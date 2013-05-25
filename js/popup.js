@@ -1,28 +1,36 @@
 function getProduct() {
-	var producturl = chrome.extension.getBackgroundPage().selectedProductUrl;
-	var producttitle = $.trim(chrome.extension.getBackgroundPage().selectedProductTitle.split("|")[1]);
-	var partnerurl = 'http://partnerprogramma.bol.com/click/click?p=1&t=url&s='+localStorage["bol_com_siteid"]+'&url='+producturl+'&f=API&subid=[id]&name='+producttitle;
-	$('#content_text').attr('title', 'Originele url: '+partnerurl);
-	getShortUrl(partnerurl, function(urldata) {
-		var removesiteid = '<div id="removesiteid"><small title="Verwijder je partnerprogramma siteid">Verwijder siteid</small></div>';
-		if (partnerurl) {
-			$('#content_text').html('Shorturl voor dit product is naar klembord gekopieerd:<br><span class="bollink">'+urldata+'</span>'+removesiteid);
-			copyToClipboard(urldata);
-			$('.bollink').attr('tabindex', 1);
-		}
-		$('#removesiteid').click(function () {
-			remove_siteid();
+	chrome.tabs.getSelected(null, function(tab) {
+		chrome.extension.getBackgroundPage().getProductData(tab, function(data){
+			var producturl = data.product.url;
+			var producttitle = $.trim(data.product.title.split("|")[1]).replace(/\s+/g, "+").toLowerCase();
+			var partnerurl = 'http://partnerprogramma.bol.com/click/click?p=1&t=url&s='+localStorage["bol_com_siteid"]+'&url='+producturl+'&f=API&subid='+localStorage["bol_com_subid"]+'&name='+producttitle;
+			$('#content_text').attr('title', 'Originele url: '+partnerurl);
+			getShortUrl(partnerurl, function(urldata) {
+				var removesiteid = '<div id="removesiteid"><small title="Verwijder je partnerprogramma siteid">Verander siteid</small></div><div id="addsubid">&nbsp;-&nbsp;<small title="Verander het partnerprogramma subid">Verander subid</small></div>';
+				if (partnerurl) {
+					$('#content_text').html('Shorturl voor dit product is naar klembord gekopieerd:<br><span class="bollink">'+urldata+'</span><br>'+removesiteid);
+					$('#content_logo').show();
+					copyToClipboard(urldata);
+					$('.bollink').attr('tabindex', 1);
+				}
+				$('#removesiteid').click(function () {
+					remove_siteid();
+				});
+				$('#addsubid').click(function () {
+					add_subid();
+				});
+				$('#content_close').show();
+				$('#content_close').click(function () {
+					window.close();
+				});
+				$('#content_block').width(450);
+				/*
+				setTimeout(function() {
+					window.close();
+				}, 10000);
+				*/
+			});
 		});
-		$('#content_close').show();
-		$('#content_close').click(function () {
-			window.close();
-		});
-		$('#content_block').width(450);
-		/*
-		setTimeout(function() {
-			window.close();
-		}, 10000);
-		*/
 	});
 }
 
@@ -68,6 +76,7 @@ function run() {
 		});
 		$('#content_block').width(450);
 		$('#content_text').html('Plaats eerst je partnerprogramma siteid:<br><input type="text" id="siteid"><button type="submit" id="sendbutton">Versturen</button>');
+		$('#content_logo').show();
 		$('#sendbutton').click(set_siteid);
 		$('#siteid').attr('tabindex', 1);
 	} else {
@@ -82,9 +91,21 @@ function set_siteid() {
 	}
 }
 
+function set_subid() {
+	if($('#subid').val() != "") {
+		localStorage["bol_com_subid"] = $('#subid').val();
+		getProduct();
+	}
+}
+
 function remove_siteid() {
 	localStorage.removeItem("bol_com_siteid");
 	run();
+}
+
+function add_subid() {
+	$('#content_text').append('<br>Voeg hier je gewenste subid toe:<br><input type="text" id="subid"><button type="submit" id="sendbutton">Versturen</button>');	
+	$('#sendbutton').click(set_subid);
 }
 
 window.onload = run;
