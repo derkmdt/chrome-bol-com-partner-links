@@ -1,7 +1,7 @@
 chrome.tabs.onUpdated.addListener(function( tabId , info, tab ) {
     if ( info.status == "complete" ) {
        	getProductData(tab, function(data) {
-			if (!data) {
+			if (!data.product) {
 				chrome.pageAction.hide(tabId);
 			} else {
 				chrome.pageAction.show(tabId);
