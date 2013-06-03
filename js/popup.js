@@ -2,8 +2,8 @@ function getProduct() {
 	chrome.tabs.getSelected(null, function(tab) {
 		chrome.extension.getBackgroundPage().getProductData(tab, function(data){
 			var producturl = data.product.url;
-			var producttitle = $.trim(data.product.title.split("|")[1]).replace(/\s+/g, "+").toLowerCase();
-			var partnerurl = 'http://partnerprogramma.bol.com/click/click?p=1&t=url&s='+localStorage["bol_com_siteid"]+'&url='+producturl+'&f=API&subid='+localStorage["bol_com_subid"]+'&name='+producttitle;
+			var producttitle = encodeURIComponent($.trim(data.product.title.split("|")[1])).toLowerCase();
+			var partnerurl = 'http://partnerprogramma.bol.com/click/click?p=1&t=url&s='+localStorage["bol_com_siteid"]+'&url='+producturl+'&f=API&subid='+encodeURIComponent(localStorage["bol_com_subid"])+'&name='+producttitle;
 			$('#content_text').attr('title', 'Originele url: '+partnerurl);
 			getShortUrl(partnerurl, function(urldata) {
 				var removesiteid = '<div id="removesiteid"><small title="Verwijder je partnerprogramma siteid">Verander siteid</small></div><div id="addsubid">&nbsp;-&nbsp;<small title="Verander het partnerprogramma subid">Verander subid</small></div>';
