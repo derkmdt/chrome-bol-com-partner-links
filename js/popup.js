@@ -49,7 +49,7 @@ function copyToClipboard(text) {
 function getShortUrl(longUrl, callback) {
 	var url = escape(longUrl);
 	$.ajax({
-		url : "https://www.404design.nl/bitly/",
+		url : "https://apps.bol.com/shorturl/",
 		dataType : 'jsonp',
 		type : "GET",
 		data : { url : url },
