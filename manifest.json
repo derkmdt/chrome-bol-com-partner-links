@@ -1,14 +1,15 @@
 {
 	"manifest_version": 2,
-	"version": "1.0",
+	"version": "1.2.1",
 	"name": "bol.com partnerprogramma link generator",
 	"description": "Genereer makkelijk links van producten voor het bol.com partnerprogramma.",
 	"background": {
-		"page": "bg.html"
+		"page": "bg.html",
+		"persistent": false
 	},
 	"content_scripts": [ {
 		"js": [ "js/dom.js" ],
-		"matches": [ "\u003Call_urls\u003E" ]
+		"matches": [ "http://*/*" ]
 	} ],
 	"page_action": {
 		"default_icon": "img/icon-19.png",
@@ -20,6 +21,10 @@
 		"16": "img/icon_16.png",
 		"48": "img/icon_48.png"
 	},
-	"permissions": [ "tabs", "background", "notifications" ],
-	"content_security_policy": "script-src 'self' https://ssl.google-analytics.com https://www.404design.nl; object-src 'self'"
+	"permissions": [ 
+		"tabs", 
+		"background", 
+		"notifications" 
+	],
+	"content_security_policy": "script-src 'self' https://ssl.google-analytics.com https://apps.bol.com; object-src 'self'"
 }
