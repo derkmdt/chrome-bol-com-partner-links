@@ -36,7 +36,23 @@
 		text-decoration:underline;
 	}
 	#sendbutton {
-		margin-left:5px;
+		width: 103px;
+		background-position: 0 -78px;
+		background-color: transparent;
+		background-repeat: no-repeat;
+		color: #FFFFFF;
+		font-size: 11px;
+		font-weight: bold;
+		text-decoration: none;
+		text-align: center;
+		height: 26px;
+		line-height: 25px;
+		padding: 0 0 5px 16px;
+		margin-top:5px;
+		cursor: pointer;
+		border: 0 none;
+		display: block;
+		background-image: url(../img/btn_normal_form.gif)
 	}
 	.bollink {
 		color:#36c;
@@ -49,4 +65,16 @@
 	}
 	#content_logo {
 		display:none;
+	}
+	.fleft {
+		float:left;
+	}
+	.buttonblock {
+		margin-top:5px;
+	}
+	.textblock {
+		margin-top:5px;
+	}
+	.clearer {
+		clear:both;
 	}

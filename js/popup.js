@@ -49,7 +49,7 @@ function copyToClipboard(text) {
 function getShortUrl(longUrl, callback) {
 	var url = escape(longUrl);
 	$.ajax({
-		url : "https://apps.bol.com/shorturl/",
+		url : "https://labs.bol.com/shorturl/",
 		dataType : 'jsonp',
 		type : "GET",
 		data : { url : url },
@@ -75,7 +75,7 @@ function run() {
 			window.close();
 		});
 		$('#content_block').width(450);
-		$('#content_text').html('Plaats eerst je partnerprogramma siteid:<br><input type="text" id="siteid"><button type="submit" id="sendbutton">Versturen</button>');
+		$('#content_text').html('<div class="clearer"></div><div>Plaats eerst je partnerprogramma siteid:<br><input type="text" id="siteid"></div><div class="buttonblock"><button type="submit" id="sendbutton">Versturen</button></div>');
 		$('#content_logo').show();
 		$('#sendbutton').click(set_siteid);
 		$('#siteid').attr('tabindex', 1);
@@ -104,7 +104,7 @@ function remove_siteid() {
 }
 
 function add_subid() {
-	$('#content_text').append('<br>Voeg hier je gewenste subid toe:<br><input type="text" id="subid"><button type="submit" id="sendbutton">Versturen</button>');	
+	$('#content_text').append('<div class="clearer"></div><div class="textblock">Voeg hier je gewenste subid toe:<br><input type="text" id="subid"></div><div class="buttonblock"><button type="submit" id="sendbutton">Versturen</button></div>');
 	$('#sendbutton').click(set_subid);
 }
 
