@@ -1,6 +1,7 @@
 function getProduct() {
 	chrome.tabs.getSelected(null, function(tab) {
 		chrome.extension.getBackgroundPage().getProductData(tab, function(data){
+			console.log('data',data);
 			var producturl = data.product.url;
 			var producttitle = encodeURIComponent($.trim(data.product.title.split("|")[1])).toLowerCase();
 			var partnerurl = 'http://partnerprogramma.bol.com/click/click?p=1&t=url&s='+localStorage["bol_com_siteid"]+'&url='+producturl+'&f=API&subid='+encodeURIComponent(localStorage["bol_com_subid"])+'&name='+producttitle;
@@ -49,17 +50,19 @@ function copyToClipboard(text) {
 function getShortUrl(longUrl, callback) {
 	var url = escape(longUrl);
 	$.ajax({
-		url : "https://apps.bol.com/shorturl/",
+		url : "https://labs.bol.com/s/public-api.php&action=shorturl&format=jsonp",
 		dataType : 'jsonp',
 		type : "GET",
 		data : { url : url },
 		success : function(data) {
+			console.log(data);
 			if(data.status_txt === "OK"){
 				var shortUrl = data.data.url;
 				callback(shortUrl);
 			}
 		},
 			error : function(xhr, error, message) {
+			console.log(error);
 			//no success, fallback to the long url
 			var shortUrl = unescape(url);
 			callback(shortUrl);
