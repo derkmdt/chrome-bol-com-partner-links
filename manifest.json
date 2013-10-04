@@ -4,8 +4,7 @@
 	"name": "bol.com partnerprogramma link generator",
 	"description": "Genereer makkelijk links van producten voor het bol.com partnerprogramma.",
 	"background": {
-		"page": "bg.html",
-		"persistent": false
+		"page": "bg.html"
 	},
 	"content_scripts": [ {
 		"js": [ "js/dom.js" ],
@@ -26,6 +25,10 @@
 		"background", 
 		"notifications" 
 	],
+<<<<<<< HEAD
 	"content_security_policy": "script-src 'self' https://ssl.google-analytics.com https://labs.bol.com; object-src 'self'",
 	"web_accessible_resources": ["img/buttons.png","img/ajax-loader.gif","img/btn_normal_form.gif","img/logoenurl.png"]
+=======
+	"content_security_policy": "script-src 'self' https://ssl.google-analytics.com https://labs.bol.com https://www.labs.bol.com; object-src 'self'"
+>>>>>>> added changes
 }
