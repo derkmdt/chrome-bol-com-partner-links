@@ -25,10 +25,6 @@
 		"background", 
 		"notifications" 
 	],
-<<<<<<< HEAD
 	"content_security_policy": "script-src 'self' https://ssl.google-analytics.com https://labs.bol.com; object-src 'self'",
 	"web_accessible_resources": ["img/buttons.png","img/ajax-loader.gif","img/btn_normal_form.gif","img/logoenurl.png"]
-=======
-	"content_security_policy": "script-src 'self' https://ssl.google-analytics.com https://labs.bol.com https://www.labs.bol.com; object-src 'self'"
->>>>>>> added changes
 }

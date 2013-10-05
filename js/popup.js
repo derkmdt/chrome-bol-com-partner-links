@@ -50,11 +50,7 @@ function copyToClipboard(text) {
 function getShortUrl(longUrl, callback) {
 	var url = escape(longUrl);
 	$.ajax({
-<<<<<<< HEAD
 		url : "https://labs.bol.com/shorturl/",
-=======
-		url : "https://labs.bol.com/s/public-api.php&action=shorturl&format=jsonp",
->>>>>>> added changes
 		dataType : 'jsonp',
 		type : "GET",
 		data : { url : url },
