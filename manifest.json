@@ -2,7 +2,7 @@
 	"manifest_version": 2,
 	"version": "1.2.6",
 	"name": "bol.com partnerprogramma link generator",
-	"short_name": "bol.comppl",
+	"short_name": "bol-part",
 	"description": "Genereer makkelijk links van producten voor het bol.com partnerprogramma.",
 	"background": {
 		"page": "bg.html"
