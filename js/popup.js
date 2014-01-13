@@ -47,19 +47,25 @@ function copyToClipboard(text) {
 }
 
 function getShortUrl(longUrl, callback) {
-	var url = escape(longUrl);
+	var url = longUrl;
 	$.ajax({
 		url : "https://labs.bol.com/shorturl/",
 		dataType : 'jsonp',
 		type : "GET",
 		data : { url : url },
 		success : function(data) {
-			if(data.status_txt === "OK"){
-				var shortUrl = data.data.url;
+			if(data.statusCode === "OK"){
+				var shortUrl = '';
+				var first_result;
+				for (var r in data.results) {
+					first_result = data.results[r]; break;
+				}
+				shortUrl = first_result.shortUrl;
 				callback(shortUrl);
 			}
 		},
 			error : function(xhr, error, message) {
+			console.log(error);
 			//no success, fallback to the long url
 			var shortUrl = unescape(url);
 			callback(shortUrl);
