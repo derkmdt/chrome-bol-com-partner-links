@@ -6,7 +6,7 @@ chrome.extension.onMessage.addListener(function(request, sender, sendResponse){
 		}
 		var product = new Object();
 		if(location.href.indexOf("bol.com") != -1 && !isSubdomain(location.href)) {
-			product.url = (document.querySelector('link[rel="canonical"]').href) ? document.querySelector('link[rel="canonical"]').href : location.href.split("?")[0];
+			product.url = (document.querySelector('link[rel="canonical"]')) ? document.querySelector('link[rel="canonical"]').href : location.href.split("?")[0];
 			product.title = document.title;
 			sendResponse( {product: product} );
 		} else {
